@@ -1,0 +1,101 @@
+version: "3.1"
+
+stories:
+  - story: Ask for restaurant type
+    steps:
+      - intent: eat_out
+      - action: action_reset_restaurant_type
+      - slot_was_set:
+          - restaurant_type: null
+      - action: form_restaurant_type
+      - active_loop: form_restaurant_type
+      - slot_was_set:
+          - restaurant_type: "something"
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: utter_ask_filter_reviews
+
+  - story: Stop to ask the restaurant type -> positive answer
+    steps:
+      - active_loop: form_restaurant_type
+      - intent: stop_asking
+      - action: utter_ask_continue
+      - intent: positive_answer
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: utter_deactivated_loop
+
+  - story: Stop to ask the restaurant type -> negative answer
+    steps:
+      - active_loop: form_restaurant_type
+      - intent: stop_asking
+      - action: utter_ask_continue
+      - intent: negative_answer
+      - action: utter_start_form_again
+      - action: form_restaurant_type
+      - active_loop: form_restaurant_type
+
+  - story: Ask more details about a restaurant
+    steps:
+      - intent: ask_more_details
+      - slot_was_set:
+          - set_restaurant_list: true
+      - action: action_reset_restaurant_name
+      - slot_was_set:
+          - restaurant_name: null
+      - action: form_restaurant_name
+      - active_loop: form_restaurant_name
+      - slot_was_set:
+          - restaurant_name: "something"
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_give_restaurant_info
+
+  - story: Input the average review (stars) for restaurants
+    steps:
+      - intent: stars
+      - slot_was_set:
+          - restaurant_type: "something"
+      - action: action_reset_review
+      - slot_was_set:
+          - stars: null
+      - slot_was_set:
+          - set_restaurant_list: null
+      - action: form_review
+      - active_loop: form_review
+      - slot_was_set:
+          - stars: [4, 5]
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: action_set_restaurant_list
+      - action: action_give_last_restaurant_list
+
+  - story: Input a negative answer for average review
+    steps:
+      - action: utter_ask_filter_reviews
+      - intent: negative_answer
+      - action: action_reset_review
+      - slot_was_set:
+          - stars: null
+      - slot_was_set:
+          - set_restaurant_list: null
+      - action: action_set_restaurant_list
+      - action: action_give_last_restaurant_list
+
+  - story: Start and say hello
+    steps:
+      - intent: start
+      - slot_was_set:
+          - restaurant_type: null
+      - action: utter_greet
+
+  - story: Say hello 
+    steps:
+      - intent: start
+      - slot_was_set:
+          - restaurant_type: "something"
+      - action: utter_greet
+      - action: utter_ask_filter_reviews

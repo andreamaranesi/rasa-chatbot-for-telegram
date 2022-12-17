@@ -1,0 +1,131 @@
+version: "3.1"
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+  - ask_more_details:
+      use_entities:
+        - restaurant_name
+  - ask_restaurant_list
+  - confirm
+  - eat_out:
+      use_entities:
+        - restaurant_type
+  - filter_reviews
+  - goodbye
+  - start
+  - negative_answer
+  - positive_answer
+  - stars:
+      use_entities:
+        - star_1
+        - star_2
+        - star_1_2
+        - single_star
+  - stop_asking
+
+forms:
+  form_restaurant_type:
+    ignored_intents:
+      - stop_asking
+      - positive_answer
+      - negative_answer
+    required_slots:
+      - restaurant_type
+  form_review:
+    required_slots:
+      - stars
+  form_restaurant_name:
+    required_slots:
+      - restaurant_name
+
+entities:
+  - star_1_2
+  - restaurant_type
+  - restaurant_name
+  - star_1
+  - star_2
+  - single_star
+
+slots:
+  stars:
+    type: list
+    influence_conversation: true
+    mappings:
+      - type: custom
+        conditions:
+          - active_loop: form_review
+            requested_slot: stars
+
+  set_restaurant_list:
+    type: bool
+    influence_conversation: true
+    mappings:
+      - type: custom
+
+  restaurant_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: form_restaurant_type
+            requested_slot: restaurant_type
+
+  restaurant_list:
+    type: list
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  restaurant_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: form_restaurant_name
+            requested_slot: restaurant_name
+
+responses:
+  utter_greet:
+    - text: Hey! Welcome to the restaurant chatbot
+  utter_last_restaurant_name:
+    - text: The last restaurant you asked for more details about was {restaurant_name}
+  utter_no_last_restaurant_name:
+    - text: A restaurant has not yet been chosen to go to
+  utter_goodbye:
+    - text: Bye
+  utter_provide_filter_reviews:
+    - text: Sure, you can proceed by writing the stars the restaurants should have
+  utter_ask_filter_reviews:
+    - text: If you want, you can specify the restaurant average review.
+  utter_specify_restaurant_type:
+    - text: Since last restaurant list is empty or doesn't exist, please specify the restaurant type (italian, japanese etc..) you wish to go
+  utter_deactivated_loop:
+    - text: Ok i stop asking
+  utter_dont_understand:
+    - text: Please repeat, I don't understand.
+  utter_dont_understand_action:
+    - text: Please repeat, I don't understand what to do.
+  utter_dont_understand_context:
+    - text: I don't understand what does it mean in this context.
+  utter_ask_continue:
+    - text: Are you sure?
+  utter_start_form_again:
+    - text: Ok, stop request is cancelled.
+
+actions:
+  - action_forget
+  - action_give_last_restaurant_list
+  - action_give_restaurant_info
+  - action_reset_restaurant_name
+  - action_reset_restaurant_type
+  - action_reset_review
+  - action_set_restaurant_list
+  - action_set_restaurant_list_bool
+  - utter_ask_filter_reviews
+  - validate_form_restaurant_name
+  - validate_form_restaurant_type
+  - validate_form_review

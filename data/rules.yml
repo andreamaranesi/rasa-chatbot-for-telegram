@@ -1,0 +1,77 @@
+version: "3.1"
+
+rules:
+  - rule: don't know
+    steps:
+      - intent: nlu_fallback
+      - action: utter_dont_understand
+
+  - rule: don't know - UnexpecTEDIntentPolicy
+    condition:
+      - active_loop: form_restaurant_type
+    steps:
+      - action: action_unlikely_intent
+      - action: utter_dont_understand_context
+      - action: action_forget
+
+  - rule: don't know - UnexpecTEDIntentPolicy
+    condition:
+      - active_loop: null
+    steps:
+      - action: action_unlikely_intent
+      - action: utter_dont_understand_context
+      - action: action_forget
+
+  - rule: don't know - next action low confidence
+    steps:
+      - action: action_default_fallback
+      - action: utter_dont_understand_action
+
+  - rule: Say goodbye anytime
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+      
+  - rule: Ask to enter stars
+    condition:
+      - slot_was_set:
+          - restaurant_type: "something"
+    steps:
+      - intent: filter_reviews
+      - action: utter_provide_filter_reviews
+
+  - rule: Ask for something, but restaurant_type is empty
+    condition:
+      - slot_was_set:
+          - restaurant_type: null
+    steps:
+      - or:
+          - intent: filter_reviews
+          - intent: stars
+      - action: utter_specify_restaurant_type
+
+  - rule: Ask for last restaurant list
+    condition:
+      - slot_was_set:
+          - set_restaurant_list: true
+    steps:
+      - intent: ask_restaurant_list
+      - action: action_give_last_restaurant_list
+
+  - rule: Ask for something, but restaurant_list is empty
+    condition:
+      - slot_was_set:
+          - set_restaurant_list: false
+    steps:
+      - or:
+          - intent: ask_restaurant_list
+          - intent: ask_more_details
+      - action: utter_specify_restaurant_type
+
+  - rule: Input a negative answer for average review
+    steps:
+      - action: utter_ask_filter_reviews
+      - intent: negative_answer
+      - action: action_reset_review
+      - action: action_set_restaurant_list
+      - action: action_give_last_restaurant_list

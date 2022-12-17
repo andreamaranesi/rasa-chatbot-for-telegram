@@ -1,0 +1,325 @@
+version: "3.1"
+nlu:
+  - intent: start
+    examples: |
+      - /start
+      - hey
+      - hello
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - hey there
+      - let's go
+      - hey dude
+      - goodmorning
+      - goodevening
+      - good afternoon
+      - what's up
+      - howdy
+      - hiya
+      - how are you
+      - what's new
+      - what's going on
+      - what's up doc
+      - howdy doody
+
+  - intent: goodbye
+    examples: |
+      - good afternoon
+      - good by
+      - good night
+      - bye
+      - goodbye
+      - have a nice day
+      - see you around
+      - bye bye
+      - see you later
+      - take care
+      - have a good one
+      - talk to you soon
+      - have a great day
+      - have fun
+      - catch you later
+      - have a good day
+      - so long
+      - laters
+      - see ya
+
+  - intent: eat_out
+    examples: |
+      - i'd like to go out for dinner
+      - i want to go out
+      - i want a place
+      - i want restaurant
+      - i want to eat at [italian](restaurant_type) restaurant
+      - i want [italian](restaurant_type) restaurant
+      - i want to eat at [korean](restaurant_type) restaurant
+      - i want an [japanese](restaurant_type) restaurant
+      - i'd like [japanese](restaurant_type) restaurant
+      - search me [vietnamese](restaurant_type)
+      - go to [international](restaurant_type)  restaurant
+      - lookup for [brazilian](restaurant_type)
+      - i want a restaurant
+      - i want to eat out
+      - go out
+      - i need a restaurant
+      - i need a place to eat
+      - i'm looking for a restaurant
+      - i'm looking for a place to eat
+      - i want to find a restaurant
+      - i want to find a place to eat
+      - i'm looking for a [chinese](restaurant_type) restaurant
+      - i'm looking for a [thai](restaurant_type) restaurant
+      - i'm looking for a [mexican](restaurant_type) restaurant
+      - i'm looking for a [indian](restaurant_type) restaurant
+      - i'm looking for a [mediterranean](restaurant_type) restaurant
+      - i'm looking for a [greek](restaurant_type) restaurant
+      - i'm looking for a [french](restaurant_type) restaurant
+      - i'm looking for a [spanish](restaurant_type) restaurant
+      - i'm looking for a [seafood](restaurant_type) restaurant
+      - i'm looking for a [steakhouse](restaurant_type) restaurant
+      - i'm looking for a [vegetarian](restaurant_type) restaurant
+      - i'm looking for a [vegan](restaurant_type) restaurant
+      - i'm looking for a [sushi](restaurant_type) restaurant
+      - i'm looking for a [pizza](restaurant_type) restaurant
+      - i'm looking for a [burger](restaurant_type) restaurant
+      - i'm looking for a [sports bar](restaurant_type) restaurant
+      - i'm looking for a [dessert](restaurant_type) restaurant
+      - i'm looking for a [bakery](restaurant_type) restaurant
+      - i'm looking for a [coffee shop](restaurant_type) restaurant
+      - i'm looking for a [tea house](restaurant_type) restaurant
+      - i'm looking for a [wine bar](restaurant_type) restaurant
+      - i'm looking for a [cocktail bar](restaurant_type) restaurant
+      - i wanna [italian](restaurant_type)
+
+  - intent: filter_reviews
+    examples: |
+      - i'd like to filter reviews
+      - set review
+      - put review
+      - filter for review
+      - search restaurant review
+      - search reviews
+      - show reviews
+      - find reviews
+      - filter reviews
+      - filter for reviews
+      - search for reviews
+      - search reviews for
+      - show me reviews
+      - find reviews for
+      - filter reviews for
+      - search for restaurant reviews
+      - show me reviews for
+      - find reviews of
+      - filter reviews of
+      - search for reviews of
+      - show me reviews of
+      - i want reviews
+      - i want to set stars
+      - i want stars
+      - i wanna star
+
+  - intent: positive_answer
+    examples: |
+      - yes
+      - i'd like to
+      - ok
+      - sure
+      - absolutely
+      - definitely
+      - of course
+      - yup
+      - yep
+      - yeah
+      - affirmative
+      - I do
+      - that sounds great
+      - I'm in
+      - let's do it
+      - I'm game
+      - I'm on board
+      - count me in
+      - I'm all for it
+
+  - intent: negative_answer
+    examples: |
+      - no
+      - i don't
+      - i don't want
+      - i don't care
+      - absolutely not
+      - not
+      - nope
+      - no i don't want
+      - no way
+      - no thank you
+      - no chance
+      - no way jose
+      - not a chance
+      - not at all
+      - not even
+      - nah
+      - never
+      - no way no how
+
+  - intent: stars
+    examples: |
+      - upper than [5](star_1) and lower than [3](star_2)
+      - upper than [4](star_1) star
+      - lower than [3](star_2) star
+      - between [1](star_1_2) and [5](star_1_2)
+      - between [2](star_1_2) and [4](star_1_2)
+      - between [2](star_1_2) and [3](star_1_2) stars
+      - equal to [2](single_star)
+      - equal to [1](single_star)
+      - equal to [3](single_star)
+      - stars equal to [4](single_star)
+      - maximum [3](star_2) star
+      - maximum [4](star_2) star
+      - maximum [5](star_2) star
+      - not less than [2](star_1) star
+      - not less than [4](star_1) star
+      - not less than [3](star_1) star
+      - not more than [4](star_2) star
+      - not more than [3](star_2) star
+      - not more than [2](star_2) star
+      - more than [3](star_1) star
+      - less than [2](star_2) star
+      - less than [3](star_2) star
+      - less than [5](star_2) star
+      - not higher than [3](star_2) star
+      - not higher than [4](star_2) star
+      - not higher than [2](star_2) star
+      - not lower than [4](star_1) star
+      - not lower than [3](star_1) star
+      - not above [4](star_2) star
+      - not above [2](star_2) star
+      - not below [1](star_1) star
+      - not below [5](star_1) star
+      - no higher than [3](star_2) star
+      - no higher than [4](star_2) star
+      - at least [4](star_1)
+      - at least [2](star_1)
+      - between [1](star_1_2) and [5](star_1_2)
+
+  - intent: ask_restaurant_list
+    examples: |
+      - i want last restaurant list
+      - i need restaurant list
+      - retrieve me restaurant list
+      - give me back list of restaurants
+      - give me last results
+      - text me last research
+      - show last search
+      - i'd like the last restaurant list
+      - i'm looking for the last restaurant list
+      - list me last results
+      - the last restaurant list
+      - the latest restaurant list
+      - get me the last restaurant list
+      - show me the last restaurant list
+      - present me the last restaurant list
+      - what's the last restaurant list?
+      - what's the latest restaurant list?
+      - i'm asking for the last restaurant list
+      - can you provide me last restaurant list
+      - can you give me the latest restaurant list
+      - can i get the last restaurant list
+      - do you have the last restaurant list
+      - do you know the latest restaurant list
+      - could you provide me last restaurant list
+      - could you give me the latest restaurant list
+      - would you have the last restaurant list
+      - would you know the latest restaurant list
+      - please give me the last restaurant list
+      - please provide the latest restaurant list
+      - could you text me the last restaurant list
+      - could you show me the latest restaurant list
+      - would you text me the last restaurant list
+      - would you show me the latest restaurant list
+      - please text me the last restaurant list
+      - please show me the latest restaurant list
+      - i'm asking for the latest restaurant list
+      - can you provide me the last restaurant list
+      - do you have the latest restaurant list
+      - do you know the last restaurant list
+      - could you provide me the latest restaurant list
+      - could you give me the last restaurant list
+      - would you have the latest restaurant list
+      - would you know the last restaurant list
+      - please give me the latest restaurant list
+      - please provide the last restaurant list
+
+  - intent: ask_more_details
+    examples: |
+      - i choose [uptown](restaurant_name)
+      - i want [rosa](restaurant_name)
+      - i want info for [ilili](restaurant_name)
+      - show me details of [scarpetta](restaurant_name)
+      - give number [atlantic](restaurant_name)
+      - give website [ocean prime](restaurant_name)
+      - review of [zuma](restaurant_name)
+      - pick up [the view restaurant](restaurant_name)
+      - give me details of [Smith & Wollensky](restaurant_name)
+      - give me more details of [zuma](restaurant_name)
+      - give me more info of [zuma](restaurant_name)
+      - give me the phone of [zuma](restaurant_name)
+      - show restaurant info for [zuma](restaurant_name)
+      - give me restaurant [zuma](restaurant_name) phone 
+      - give the restaurant [zuma](restaurant_name) website
+      - what about [the lambs club](restaurant_name)
+      - tell me about [the modern](restaurant_name)
+      - what is [the capital grille](restaurant_name)
+      - tell me more about [the marc](restaurant_name)
+      - what can you tell me about [the nomad](restaurant_name)
+      - give me info about [the mark restaurant](restaurant_name)
+      - what do you know about [the ritz-carlton](restaurant_name)
+      - tell me more about [the russian tea room](restaurant_name)
+      - give me details of [the palm](restaurant_name)
+      - what about [the red rooster](restaurant_name)
+      - give me information about [the spotted pig](restaurant_name)
+      - what can you tell me about [the modern](restaurant_name)
+      - give me information on [the nomad](restaurant_name)
+      - tell me more about [the modern](restaurant_name)
+      - give me info on [the mark restaurant](restaurant_name)
+      - give me details of [the russian tea room](restaurant_name)
+      - what about [the palm](restaurant_name)
+      - give me information about [the red rooster](restaurant_name)
+      - what can you tell me about [the spotted pig](restaurant_name)
+      - give me information on [the modern](restaurant_name)
+      - tell me more about [the nomad](restaurant_name)
+      - what do you know about [the marc](restaurant_name)
+      - give me details of [the ritz-carlton](restaurant_name)
+      - what about [the russian tea room](restaurant_name)
+      - give me information about [the palm](restaurant_name)
+      - what can you tell me about [the red rooster](restaurant_name)
+      - give me information on [the spotted pig](restaurant_name)
+      - what do you know about [the nomad](restaurant_name)
+      - what about [the ritz-carlton](restaurant_name)
+      - what can you tell me about [the palm](restaurant_name)
+      - tell me more about [the spotted pig](restaurant_name)
+
+  - intent: stop_asking
+    examples: |
+      - stop asking
+      - please exit
+      - don't need anymore
+      - stop
+      - i'm sure stop to ask
+      - stop yes
+      - no more questions
+      - that's all
+      - enough
+      - don't ask
+      - no more
+      - quit
+      - i'm done
+      - that's enough
+      - i'm finished
+      - enough questions
+      - i'm done asking
+      - no more queries
+      - that's it
+      - i'm done here
